@@ -2,9 +2,10 @@ const express = require("express");
 const app = express();
 
 const config = require("./knexfile");
-const knex = require("knex")(
-  config.staging 
-);
+
+const env = process.env.NODE_ENV || "development";
+
+const knex = require("knex")(config[env]);
 
 var listarpessoas = function(){
     return knex("pessoa").select();
